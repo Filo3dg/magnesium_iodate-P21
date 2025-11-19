@@ -1,77 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/styles.css">
-        <script type="text/javascript" src="jsmol/JSmol.min.js"></script>
-        <title>Normal Modes Animation of Magnesium Iodate <i>P2<sub>1</sub></i> Phase</title>
-    </head>
-    <body>
-        <div class="borders">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="text/javascript" src="jsmol/JSmol.min.js"></script>
+    <title>
+      Normal Modes Animation of Magnesium Iodate <i>P2<sub>1</sub></i> Phase
+    </title>
+  </head>
+  <body>
+    <div class="borders">
+      <h1>
+        Normal Modes Animation of Magnesium Iodate <i>P2<sub>1</sub></i> Phase
+      </h1>
+      <p>
+        <a href="mailto:filippo.bodo@unito.it">Filippo Bodo<sup>1,2</sup></a
+        >, <a href="mailto:ekraka@smu.edu">Elfi Kraka<sup>1</sup></a
+        >, and
+        <a href="mailto:alessandro.erba@unito.it"
+          >Alessandro Erba<sup>2</sup></a
+        >
+      </p>
+      <p>
+        <i
+          >1. Computational and Theoretical Chemistry Group (CATCO), Department
+          of Chemistry, Southern Methodist University, Dallas, Texas 75275-0314,
+          United States <br />
+          2. Dipartimento di Chimica, Università di Torino, via Giuria 5, 10125
+          Torino, Italy
+        </i>
+      </p>
 
-            <h1>Normal Modes Animation of Magnesium Iodate <i>P2<sub>1</sub></i> Phase</h1>
-            <p><a href="mailto:filippo.bodo@unito.it">Filippo Bodo<sup>1,2</sup></a>,
-            <a href="mailto:ekraka@smu.edu">Elfi Kraka<sup>1</sup></a>,
-            and <a href="mailto:alessandro.erba@unito.it">Alessandro Erba<sup>2</sup></a></p>
-            <p><i>1. Computational and Theoretical Chemistry Group (CATCO), Department of Chemistry, 
-                Southern Methodist University, Dallas, Texas 75275-0314, United States <br>
-                2. Dipartimento di Chimica, Università di Torino, via Giuria 5, 
-                10125 Torino, Italy </i></p>
+      <hr />
+      <!-- big line -->
 
-            <hr> <!-- big line -->
+      <div>
+        <label for="modeSelect">Select Vibrational Mode:</label>
+        <select id="modeSelect">
+          <option value="22">Bending Eu 1 (657.40 cm-1)</option>
+          <option value="23">Bending Eu 2 (657.40 cm-1)</option>
+          <option value="24">Bending Fu 1 (659.45 cm-1)</option>
+          <option value="25">Bending Fu 2 (659.45 cm-1)</option>
+          <option value="26">Bending Fu 3 (659.45 cm-1)</option>
+          <option value="27">Bending Fu 1 (666.15 cm-1)</option>
+          <option value="28">Bending Fu 2 (666.15 cm-1)</option>
+          <option value="29">Bending Fu 3 (666.15 cm-1)</option>
+          <option value="30">Stretching Fg 1 (1359.95 cm-1)</option>
+          <option value="94">
+            I-O<sub>fn</sub> Asymmetric Stretching Raman (728.36
+            cm<sup>-1</sup>)
+          </option>
+          <option value="96">
+            I-O<sub>fn</sub> Asymmetric Stretching Raman (743.44
+            cm<sup>-1</sup>)
+          </option>
+          <option value="100">
+            I-O<sub>fn</sub> Symmetric Stretching Raman (781.81 cm<sup>-1</sup>)
+          </option>
+          <!-- Add more options for different modes -->
+        </select>
 
-            <div>
-                <label for="modeSelect">Select Vibrational Mode:</label>
-                <select id="modeSelect">
-                    <option value="22">Bending Eu 1 (657.40 cm-1)</option>
-                    <option value="23">Bending Eu 2 (657.40 cm-1)</option>
-                    <option value="24">Bending Fu 1 (659.45 cm-1)</option>
-                    <option value="25">Bending Fu 2 (659.45 cm-1)</option>
-                    <option value="26">Bending Fu 3 (659.45 cm-1)</option>
-                    <option value="27">Bending Fu 1 (666.15 cm-1)</option>
-                    <option value="28">Bending Fu 2 (666.15 cm-1)</option>
-                    <option value="29">Bending Fu 3 (666.15 cm-1)</option>
-                    <option value="30">Stretching Fg 1 (1359.95 cm-1)</option>
-                    <option value="31">Stretching Fg 2 (1359.95 cm-1)</option>
-                    <option value="32">Stretching Fg 3 (1359.95 cm-1)</option>
-                    <option value="33">Stretching Ag (1361.10 cm-1)</option>
-                    <!-- Add more options for different modes -->
-                </select>
+        <button onclick="showSelectedMode()">Show Mode</button>
+      </div>
 
-                <button onclick="showSelectedMode()">Show Mode</button>
+      <script>
+        // Initialize JSmol
+        var jmolApplet;
+        var info = {
+          width: "100%",
+          //height: "100%",
+          height: 700,
+          j2sPath: "jsmol/j2s",
+          //jarPath: "jsmol/java",
+          //jarFile: "jsmol/java/JmolApplet.jar",
+          //isSigned: false,
+          debug: false,
+          use: "HTML5",
+          script: "load MgIO32_p21_FREQ_exp_pbe0d3.out ; axes off; unitcell on",
+          //script: 'load dryice.out {2 2 2}; unitcell "conventional"; axes off',
+        };
 
-            </div>
+        jmolApplet = Jmol.getApplet("jmolApplet", info);
 
-            <script>
-
-                // Initialize JSmol
-                var jmolApplet;
-                var info = {
-                    width: "100%",
-                    //height: "100%",
-                    height: 700,
-                    j2sPath: "jsmol/j2s",
-                    //jarPath: "jsmol/java",
-                    //jarFile: "jsmol/java/JmolApplet.jar",
-                    //isSigned: false,
-                    debug: false,
-                    use: "HTML5",
-                    script: 'load MgIO32_p21_FREQ_exp_pbe0d3.out ; axes off; unitcell on',
-                    //script: 'load dryice.out {2 2 2}; unitcell "conventional"; axes off',
-                }
-
-                jmolApplet = Jmol.getApplet("jmolApplet", info);
-
-                // Show selected vibrational mode
-                function showSelectedMode() {
-                    var selectedMode = document.getElementById("modeSelect").value;
-                    var script = "vibration ON; vibration SCALE 6; model " +
-                        selectedMode + ";" + "vector ON; vector 0.06; vector scale 80;";
-                    Jmol.script(jmolApplet, script);
-                }
-            </script>
-        </div>
-    </body>
+        // Show selected vibrational mode
+        function showSelectedMode() {
+          var selectedMode = document.getElementById("modeSelect").value;
+          var script =
+            "vibration ON; vibration SCALE 6; model " +
+            selectedMode +
+            ";" +
+            "vector ON; vector 0.06; vector scale 80;";
+          Jmol.script(jmolApplet, script);
+        }
+      </script>
+    </div>
+  </body>
 </html>
-
